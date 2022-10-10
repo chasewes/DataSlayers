@@ -1,0 +1,29 @@
+def dec_tree(df, features_as_targets, do_normalize):
+    if do_normalize:
+        dec_df = fill_with_mean(normalize(drop_rows_missing_target(convert_categorical_to_numeric(df))))
+    else:
+        dec_df = fill_with_mean(drop_rows_missing_target(convert_categorical_to_numeric(df)))
+
+    if features_as_targets:
+        X = dec_df.drop(dec_df.columns[-1:], axis=1)
+    else:
+        X = dec_df.drop(dec_df.columns[-18:], axis=1)
+    y = dec_df['nonViolPerPop']
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+    dtree = tree.DecisionTreeRegressor()
+    dtree = dtree.fit(X_train, y_train)
+    preds = dtree.predict(X_test)
+
+    mae = np.mean(abs(preds - y_test))
+    print('Mean Absolute Error:', mae)
+
+print('Using targets as features (normalized):')
+dec_tree(df, True, True)
+print('\n\nNot using targets as features (normalized):')
+dec_tree(df, False, True)
+print('\n\nUsing targets as features (not normalized):')
+dec_tree(df, True, False)
+print('\n\nNot using targets as features (not normalized):')
+dec_tree(df, False, False)
