@@ -1,3 +1,9 @@
+!pip install = {
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "sklearn"}
+
 import streamlit as st
 import pandas as pd
 import numpy as np
