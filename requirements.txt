@@ -1,0 +1,6 @@
+python -m pip list
+streamlit
+numpy
+pandas
+matplotlib
+sklearn
