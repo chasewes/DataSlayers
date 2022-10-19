@@ -36,10 +36,46 @@ elif dataset == 'Car':
     df = pd.read_csv('data/car/car.data', header=None)
     df.columns = ['buying', 'maint', 'doors', 'persons', 'lug_boot', 'safety','class']
     
+# Data Slayers™️ Original Nominalization Method for both the cars and mushroom datasets
+def nominalize(df, dataset):
+    if dataset == 'Mushroom':
+        # map ordinal features to integers
+        df['cap-shape'] = df['cap-shape'].map({'b': 0, 'c': 1, 'x': 2, 'f': 3, 'k': 4, 's': 5})
+        df['cap-surface'] = df['cap-surface'].map({'f': 0, 'g': 1, 'y': 2, 's': 3})
+        df['cap-color'] = df['cap-color'].map({'n': 0, 'b': 1, 'c': 2, 'g': 3, 'r': 4, 'p': 5, 'u': 6, 'e': 7, 'w': 8, 'y': 9})
+        df['bruises'] = df['bruises'].map({'t': 0, 'f': 1})
+        df['odor'] = df['odor'].map({'a': 0, 'l': 1, 'c': 2, 'y': 3, 'f': 4, 'm': 5, 'n': 6, 'p': 7, 's': 8})
+        df['gill-attachment'] = df['gill-attachment'].map({'a': 0, 'd': 1, 'f': 2, 'n': 3})
+        df['gill-spacing'] = df['gill-spacing'].map({'c': 0, 'w': 1, 'd': 2})
+        df['gill-size'] = df['gill-size'].map({'b': 0, 'n': 1})
+        df['gill-color'] = df['gill-color'].map({'k': 0, 'n': 1, 'b': 2, 'h': 3, 'g': 4, 'r': 5, 'o': 6, 'p': 7, 'u': 8, 'e': 9, 'w': 10, 'y': 11})
+        df['stalk-shape'] = df['stalk-shape'].map({'e': 0, 't': 1})
+        df['stalk-root'] = df['stalk-root'].map({'b': 0, 'c': 1, 'u': 2, 'e': 3, 'z': 4, 'r': 5, '?': 6})
+        df['stalk-surface-above-ring'] = df['stalk-surface-above-ring'].map({'f': 0, 'y': 1, 'k': 2, 's': 3})
+        df['stalk-surface-below-ring'] = df['stalk-surface-below-ring'].map({'f': 0, 'y': 1, 'k': 2, 's': 3})
+        df['stalk-color-above-ring'] = df['stalk-color-above-ring'].map({'n': 0, 'b': 1, 'c': 2, 'g': 3, 'o': 4, 'p': 5, 'e': 6, 'w': 7, 'y': 8})
+        df['stalk-color-below-ring'] = df['stalk-color-below-ring'].map({'n': 0, 'b': 1, 'c': 2, 'g': 3, 'o': 4, 'p': 5, 'e': 6, 'w': 7, 'y': 8})
+        df['veil-type'] = df['veil-type'].map({'p': 0, 'u': 1})
+        df['veil-color'] = df['veil-color'].map({'n': 0, 'o': 1, 'w': 2, 'y': 3})
+        df['ring-number'] = df['ring-number'].map({'n': 0, 'o': 1, 't': 2})
+        df['ring-type'] = df['ring-type'].map({'c': 0, 'e': 1, 'f': 2, 'l': 3, 'n': 4, 'p': 5, 's': 6, 'z': 7})
+        df['spore-print-color'] = df['spore-print-color'].map({'k': 0, 'n': 1, 'b': 2, 'h': 3, 'r': 4, 'o': 5, 'u': 6, 'w': 7, 'y': 8})
+        df['population'] = df['population'].map({'a': 0, 'c': 1, 'n': 2, 's': 3, 'v': 4, 'y': 5})
+        df['habitat'] = df['habitat'].map({'g': 0, 'l': 1, 'm': 2, 'p': 3, 'u': 4, 'w': 5, 'd': 6})
+        df['class'] = df['class'].map({'e': 0, 'p': 1})
 
-def nominalize(df):
-    
+    elif dataset == 'Car':
+        # map ordinal features to integers
+
+        df['buying'] = df['buying'].replace({'vhigh':3, 'high':2, 'med':1, 'low':0})
+        df['maint'] = df['maint'].replace({'vhigh':3, 'high':2, 'med':1, 'low':0})
+        df['doors'] = df['doors'].replace({'5more':5})
+        df['persons'] = df['persons'].replace({'more':5})
+        df['lug_boot'] = df['lug_boot'].replace({'small':0, 'med':1, 'big':2})
+        df['safety'] = df['safety'].replace({'low':0, 'med':1, 'high':2})
+        df['class'] = df['class'].replace({'unacc':0, 'acc':1, 'good':2, 'vgood':3})  
     return df
+
 # Nominalize the data
 if nominalization == 'pd.get_dummies()':
     #get dummies for everything except the class
@@ -49,7 +85,7 @@ if nominalization == 'pd.get_dummies()':
         df = pd.get_dummies(df, columns=['buying', 'maint', 'doors', 'persons', 'lug_boot', 'safety'])
     
 elif nominalization == 'Data Slayers™️ Original Nominalization Method':
-    df = nominalize(df)
+    df = nominalize(df, dataset)
 
 #button to hide the dataframe
 if st.button('Hide Dataframe'):
@@ -69,7 +105,6 @@ X_train, X_test, y_train, y_test = train_test_split(X,y, train_size=split_ratio,
 
 def ds_distance(x, y, p=2):
     return 0
-
 
 if distance_metric == 'Minkowski':
     distance = 'minkowski'
