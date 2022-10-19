@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
+#show and center a jpg "mushroom_car.jpg"
+st.image("mushroom_car.jpg", use_column_width=True, width=300)
+
 st.markdown("<h1 style='text-align: center; color: black;'>Mushroom/Car Classification</h1>", unsafe_allow_html=True)
 
 
