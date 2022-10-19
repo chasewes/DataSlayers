@@ -1,6 +1,1 @@
-python -m pip list
-streamlit
-numpy
-pandas
-matplotlib
-sklearn
+pip install streamlit, numpy, pandas, matplotlib, sklearn
