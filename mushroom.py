@@ -21,7 +21,8 @@ dataset = st.radio('Select Dataset', ('Mushroom', 'Car'))
 #select the nominalization method
 nominalization = st.radio('Select Nominalization Method', ('pd.get_dummies()', 'Data Slayers™️ Original Nominalization Method'))
 
-distance_metric = st.radio('Select Distance Metric', ('Minkowski', 'Euclidean' ,'Data Slayers™️ Original Distance Metric'))
+distance_metric = st.radio('Select Distance Metric', ('Minkowski', 'Euclidean' , 'Manhattan', 'Chebyshev', 'Mahalanobis', 'Haversine', 'Hamming', 'Canberra', 
+                                                        'BrayCurtis', 'Data Slayers™️ Original Distance Metric'))
 
 #create a slider for k selection
 k = st.slider('k',min_value = 1, max_value = 10, value = 5)
@@ -110,6 +111,20 @@ if distance_metric == 'Minkowski':
     distance = 'minkowski'
 elif distance_metric == 'Euclidean':
     distance = 'euclidean'
+elif distance_metric == 'Manhattan':
+    distance = 'manhattan'
+elif distance_metric == 'Chebyshev':
+    distance = 'chebyshev'
+elif distance_metric == 'Mahalanobis':
+    distance = 'mahalanobis'
+elif distance_metric == 'Haversine':
+    distance = 'haversine'
+elif distance_metric == 'Hamming':
+    distance = 'hamming'
+elif distance_metric == 'Canberra':
+    distance = 'canberra'
+elif distance_metric == 'BrayCurtis':
+    distance = 'braycurtis'
 elif distance_metric == 'Data Slayers™️ Original Distance Metric':
     distance = ds_distance
 
