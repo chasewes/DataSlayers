@@ -105,7 +105,7 @@ y = df['class']
 X_train, X_test, y_train, y_test = train_test_split(X,y, train_size=split_ratio, random_state=42, shuffle=True)
 
 def ds_distance(x, y, p=2):
-    return 0
+    return ((x-y)/2)**2
 
 if distance_metric == 'Minkowski':
     distance = 'minkowski'
