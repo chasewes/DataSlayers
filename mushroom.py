@@ -22,7 +22,7 @@ dataset = st.radio('Select Dataset', ('Mushroom', 'Car'))
 nominalization = st.radio('Select Nominalization Method', ('pd.get_dummies()', 'Data Slayers™️ Original Nominalization Method'))
 
 distance_metric = st.radio('Select Distance Metric', ('Minkowski', 'Euclidean' , 'Manhattan', 'Chebyshev','Hamming', 'Canberra', 
-                                                        'BrayCurtis', 'Data Slayers™️ Original Distance Metric'))
+                                                        'BrayCurtis'))
 
 #create a slider for k selection
 k = st.slider('k',min_value = 1, max_value = 10, value = 5)
@@ -121,8 +121,6 @@ elif distance_metric == 'Canberra':
     distance = 'canberra'
 elif distance_metric == 'BrayCurtis':
     distance = 'braycurtis'
-elif distance_metric == 'Data Slayers™️ Original Distance Metric':
-    distance = ds_distance
 
 #train the model
 knn = KNeighborsClassifier(n_neighbors=k, metric=distance)
